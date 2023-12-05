@@ -2,3 +2,4 @@ res://world.tscn
 res://Scenes/Characters/basic_enemy.tscn
 res://Scenes/Characters/player.tscn
 res://Scenes/Characters/basic_enemy.gd
+res://world.gd
