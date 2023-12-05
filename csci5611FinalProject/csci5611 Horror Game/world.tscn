@@ -1,34 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2gbpxivbr1db"]
+[gd_scene load_steps=6 format=3 uid="uid://b2gbpxivbr1db"]
 
 [ext_resource type="Texture2D" uid="uid://rrwqmf8ebjro" path="res://Assets/Textures/Concrete_Tile.png" id="1_v55cr"]
 [ext_resource type="PackedScene" uid="uid://dhppbqwwkxb6q" path="res://Scenes/Characters/player.tscn" id="2_yn1ip"]
+[ext_resource type="PackedScene" uid="uid://b3lxma3s8xbwn" path="res://Scenes/Characters/basic_enemy.tscn" id="3_eacdg"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tciq7"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_7kfhq"]
-sky_material = SubResource("ProceduralSkyMaterial_tciq7")
-
-[sub_resource type="Environment" id="Environment_a3y18"]
-background_mode = 2
-sky = SubResource("Sky_7kfhq")
-tonemap_mode = 2
-glow_enabled = true
+[sub_resource type="Environment" id="Environment_wj7b5"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.27451, 0.27451, 0.27451, 1)
+ambient_light_energy = 10.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3mau7"]
 albedo_texture = ExtResource("1_v55cr")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dsss"]
 
 [node name="World" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+visible = false
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_a3y18")
+environment = SubResource("Environment_wj7b5")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0972433, -0.025486, -0.166401)
@@ -38,6 +31,9 @@ size = Vector3(103.421, 0.0756978, 100.872)
 
 [node name="Player" parent="." instance=ExtResource("2_yn1ip")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.2665, 9.53674e-07, 47.1345)
+
+[node name="Node3D" parent="." instance=ExtResource("3_eacdg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.60285, 3.06975, 45.1339)
 
 [node name="Maze Box and Walls" type="Node3D" parent="."]
 
@@ -52,10 +48,9 @@ use_collision = true
 size = Vector3(102.219, 6.29463, 1.03255)
 
 [node name="Wall 3" type="CSGBox3D" parent="Maze Box and Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.2957, 3.29936, -0.811568)
-material_override = SubResource("StandardMaterial3D_6dsss")
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -51.5109, 3.20496, -0.579613)
 use_collision = true
-size = Vector3(1.29105, 6.29463, 99.853)
+size = Vector3(102.219, 6.29463, 1.03255)
 
 [node name="Wall 4" type="CSGBox3D" parent="Maze Box and Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.4951, 3.29936, -0.0237881)
@@ -69,7 +64,7 @@ use_collision = true
 size = Vector3(103.22, 0.504816, 102.126)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Maze Box and Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.055, 3.21034, 36.0582)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.5227, 3.21034, 36.0582)
 use_collision = true
 size = Vector3(23.0203, 6.29991, 12.3486)
 
