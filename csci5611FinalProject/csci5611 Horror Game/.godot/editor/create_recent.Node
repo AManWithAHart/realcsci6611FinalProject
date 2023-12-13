@@ -1,0 +1,16 @@
+RayCast3D
+VisibleOnScreenNotifier3D
+CollisionShape3D
+Area3D
+CollisionPolygon3D
+CollisionPolygon2D
+ProgressBar
+Node2D
+ColorRect
+CanvasLayer
+OmniLight3D
+NavigationAgent3D
+NavigationRegion3D
+SpotLight3D
+MeshInstance3D
+CharacterBody3D

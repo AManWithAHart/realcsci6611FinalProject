@@ -7,11 +7,9 @@ script/source = "extends CharacterBody3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 2.5
 const SENSITIVITY = 0.003
-const MAX_STAMINA = 1.5
-const REST_TIME = 2.
+const MAX_STAMINA = 1.
 
 var stamina = MAX_STAMINA
-var rest = REST_TIME
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
@@ -31,16 +29,12 @@ func _unhandled_input(event):
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
 
-func get_sprint_speed(is_moving, is_sprinting, delta):
-	if (stamina > 0 and is_sprinting and is_moving):
-		rest = 0
+func handle_sprint(is_sprinting, delta):
+	if (stamina > 0 and is_sprinting):
 		stamina -= delta
-	elif (not is_sprinting or not is_moving):
-		if (rest >= REST_TIME):
-			if (stamina < MAX_STAMINA): stamina += delta
-			if (stamina > MAX_STAMINA): stamina = MAX_STAMINA
-		else:
-			rest += delta
+	elif (not is_sprinting):
+		if (stamina < MAX_STAMINA): stamina += delta
+		if (stamina > MAX_STAMINA): stamina = MAX_STAMINA
 		is_sprinting = false
 	else:
 		is_sprinting = false
@@ -60,10 +54,11 @@ func _physics_process(delta):
 	var input_dir = Input.get_vector(\"left\", \"right\", \"forward\", \"backward\")
 	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	var move_speed = get_sprint_speed(direction, Input.is_action_pressed(\"sprint\"), delta)
-	
 	#update velocities
 	if direction:
+		
+		#handle sprinting
+		var move_speed = update_stamina(Input.is_action_pressed(\"sprint\"), delta)
 		
 		velocity.x = direction.x * move_speed
 		velocity.z = direction.z * move_speed
@@ -72,8 +67,6 @@ func _physics_process(delta):
 		velocity.z = 0.0 #move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
-
-	stamina_bar.value = 100 * stamina / MAX_STAMINA
 "
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6djcv"]
@@ -84,7 +77,6 @@ points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607,
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sgc4l"]
 
 [node name="Player" type="CharacterBody3D"]
-collision_layer = 2
 script = SubResource("GDScript_qs4nq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -99,14 +91,13 @@ shape = SubResource("ConvexPolygonShape3D_ssd7a")
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44256, 0)
-current = true
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424012, -0.705912, 0)
 light_color = Color(0.364706, 0.364706, 0.364706, 1)
 light_energy = 5.0
 distance_fade_begin = 20.0
-spot_range = 19.0
+spot_range = 18.8884
 spot_attenuation = 1.36604
 spot_angle = 20.4564
 spot_angle_attenuation = 2.0
