@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://world.gd" id="1_702xv"]
 [ext_resource type="Texture2D" uid="uid://rrwqmf8ebjro" path="res://Assets/Textures/Concrete_Tile.png" id="1_v55cr"]
 [ext_resource type="PackedScene" uid="uid://dhppbqwwkxb6q" path="res://Scenes/Characters/player.tscn" id="2_yn1ip"]
-[ext_resource type="PackedScene" uid="uid://b3lxma3s8xbwn" path="res://Scenes/Characters/basic_enemy.tscn" id="3_eacdg"]
+[ext_resource type="PackedScene" uid="uid://dj3ko3n82nqve" path="res://stalker.tscn" id="4_55ra3"]
 
 [sub_resource type="Environment" id="Environment_wj7b5"]
 background_mode = 1
@@ -32,8 +32,8 @@ environment = SubResource("Environment_wj7b5")
 [node name="Player" parent="." instance=ExtResource("2_yn1ip")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.2665, 9.53674e-07, 47.1345)
 
-[node name="Node3D" parent="." instance=ExtResource("3_eacdg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.60285, 3.06975, 45.1339)
+[node name="Stalker" parent="." instance=ExtResource("4_55ra3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.0222, 1.90839, 46.08)
 
 [node name="Ceiling" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.805752, 6.56399, 0.510361)

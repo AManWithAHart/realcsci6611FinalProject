@@ -1,3 +1,6 @@
 res://world.tscn
-res://Scenes/Characters/basic_enemy.tscn
+res://Scenes/Characters/basic_enemy.gd
 res://Scenes/Characters/player.tscn
+res://Scenes/Characters/stalker.tscn
+res://Scripts/stalker.gd
+res://stalker.tscn

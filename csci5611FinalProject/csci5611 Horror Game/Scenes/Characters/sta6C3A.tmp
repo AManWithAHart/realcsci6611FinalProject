@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dj3ko3n82nqve"]
+
+[ext_resource type="Script" path="res://Scripts/stalker.gd" id="1_3tdke"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o7t8r"]
+albedo_color = Color(0.705882, 0.223529, 0.235294, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_d3h7g"]
+material = SubResource("StandardMaterial3D_o7t8r")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pjkba"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cbd80"]
+radius = 1.5
+height = 4.0
+
+[node name="Stalker" type="CharacterBody3D" groups=["stalker"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_3tdke")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_d3h7g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_pjkba")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="DetectionArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+shape = SubResource("CapsuleShape3D_cbd80")
+
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]
+[connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_area_area_exited"]
