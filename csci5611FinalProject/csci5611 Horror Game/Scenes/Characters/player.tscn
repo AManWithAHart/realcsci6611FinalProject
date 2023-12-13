@@ -10,8 +10,15 @@ const SENSITIVITY = 0.003
 const MAX_STAMINA = 1.5
 const REST_TIME = 2.
 
+const MAX_BATTERY = 10
+
 var stamina = MAX_STAMINA
 var rest = REST_TIME
+
+var currBattery = MAX_BATTERY
+var flashlight_on = true
+
+
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
@@ -19,6 +26,8 @@ var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 @onready var stamina_bar = $GUI/ProgressBar
+@onready var flashlight = $GUI/flashlightBattery
+@onready var headL = $Head/Camera3D/headlight
 
 
 
@@ -30,6 +39,8 @@ func _unhandled_input(event):
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
+		
+		
 
 func get_sprint_speed(is_moving, is_sprinting, delta):
 	if (stamina > 0 and is_sprinting and is_moving):
@@ -54,6 +65,22 @@ func _physics_process(delta):
 	# Handle Jump.
 	if Input.is_action_just_pressed(\"jump\") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		
+	if Input.is_action_just_pressed(\"flashlight\"):
+		flashlight_on = !flashlight_on
+		
+	
+	if(flashlight_on):
+		if(currBattery <= 0):
+			headL.light_energy = 0
+		else:
+			headL.light_energy = 15
+			currBattery -= delta/20
+	else:
+		headL.light_energy = 0
+			
+		
+		
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -74,6 +101,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 	stamina_bar.value = 100 * stamina / MAX_STAMINA
+	flashlight.value = 100 * currBattery / MAX_BATTERY
 "
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6djcv"]
@@ -99,7 +127,7 @@ shape = SubResource("ConvexPolygonShape3D_ssd7a")
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44256, 0)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Head/Camera3D"]
+[node name="headlight" type="SpotLight3D" parent="Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424012, -0.705912, 0)
 light_color = Color(0.364706, 0.364706, 0.364706, 1)
 light_energy = 5.0
@@ -126,3 +154,13 @@ offset_bottom = 627.0
 theme_override_styles/background = SubResource("StyleBoxFlat_sgc4l")
 value = 50.0
 show_percentage = false
+
+[node name="flashlightBattery" type="ProgressBar" parent="GUI"]
+modulate = Color(1, 1, 0.0705882, 1)
+show_behind_parent = true
+offset_left = 50.0
+offset_top = 75.0
+offset_right = 220.0
+offset_bottom = 175.0
+scale = Vector2(0.75, 0.75)
+value = 50.0
