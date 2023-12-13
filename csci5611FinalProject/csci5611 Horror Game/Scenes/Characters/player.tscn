@@ -136,7 +136,8 @@ spot_angle_attenuation = 2.0
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11487, 0)
 light_color = Color(0.286275, 0.286275, 0.286275, 1)
-omni_range = 4.0
+light_energy = 5.0
+omni_range = 6.0
 omni_attenuation = 0.517632
 
 [node name="GUI" type="CanvasLayer" parent="."]
