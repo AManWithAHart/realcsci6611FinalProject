@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2gbpxivbr1db"]
+[gd_scene load_steps=10 format=3 uid="uid://b2gbpxivbr1db"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_702xv"]
 [ext_resource type="Texture2D" uid="uid://rrwqmf8ebjro" path="res://Assets/Textures/Concrete_Tile.png" id="1_v55cr"]
 [ext_resource type="PackedScene" uid="uid://dhppbqwwkxb6q" path="res://Scenes/Characters/player.tscn" id="2_yn1ip"]
 [ext_resource type="PackedScene" uid="uid://dj3ko3n82nqve" path="res://stalker.tscn" id="4_55ra3"]
+[ext_resource type="PackedScene" uid="uid://cdpowf6sgq383" path="res://red_collection.tscn" id="5_dlpm2"]
+[ext_resource type="PackedScene" uid="uid://d3pvxflfbmons" path="res://blue_collection.tscn" id="6_x0x65"]
 
 [sub_resource type="Environment" id="Environment_wj7b5"]
 background_mode = 1
@@ -301,3 +303,9 @@ size = Vector3(5.09346, 6.57258, 5.05905)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.1444, 3.18528, 5.31777)
 use_collision = true
 size = Vector3(18.7646, 6.57258, 17.1883)
+
+[node name="RedCollection" parent="." instance=ExtResource("5_dlpm2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.1234, 1.6022, -24.0863)
+
+[node name="blue_collection" parent="." instance=ExtResource("6_x0x65")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.357, 1.33016, 45.1363)

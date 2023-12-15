@@ -1,7 +1,8 @@
+CollisionShape3D
+MeshInstance3D
+Area3D
 RayCast3D
 VisibleOnScreenNotifier3D
-CollisionShape3D
-Area3D
 CollisionPolygon3D
 CollisionPolygon2D
 ProgressBar
@@ -12,5 +13,4 @@ OmniLight3D
 NavigationAgent3D
 NavigationRegion3D
 SpotLight3D
-MeshInstance3D
 CharacterBody3D
