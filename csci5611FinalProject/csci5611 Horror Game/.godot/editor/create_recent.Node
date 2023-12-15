@@ -1,7 +1,12 @@
-ProgressBar
 CollisionShape3D
 MeshInstance3D
 Area3D
+CSGCylinder3D
+Button
+Label
+VBoxContainer
+CenterContainer
+ProgressBar
 RayCast3D
 VisibleOnScreenNotifier3D
 CollisionPolygon3D

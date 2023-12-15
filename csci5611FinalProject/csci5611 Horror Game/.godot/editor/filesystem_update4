@@ -5,3 +5,10 @@ res://stalker.tscn
 res://red_collection.tscn
 res://blue_collection.tscn
 res://green_collection.tscn
+res://victory_screen.gd
+res://victory_screen.tscn
+res://FinishPlatform.gd
+res://world.gd
+res://Finsih.gd
+res://FinalPlatform.gd
+res://final_platform.tscn
