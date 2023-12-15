@@ -17,6 +17,7 @@ var rest = REST_TIME
 var curBattery = MAX_BATTERY
 var flashlight_on = true
 
+var coins_collected = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
@@ -26,6 +27,32 @@ var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
 @onready var stamina_bar = $GUI/ProgressBar
 @onready var battery_power = $GUI/lightBar
 @onready var flashlight = $Head/Camera3D/headLight
+
+@onready var rCollect = $GUI/redcollect
+@onready var bCollect = $GUI/bluecollect
+@onready var gCollect = $GUI/greencollect
+
+
+
+func _on_red_collected():
+	rCollect.value = 100
+	coins_collected += 1
+	
+func _on_blue_collected():
+	bCollect.value = 100
+	coins_collected += 1
+	
+func _on_green_collected():
+	gCollect.value = 100
+	coins_collected += 1
+	
+	
+
+#func open_exit():
+	#if coins_collected == 3:
+		
+
+
 
 
 
@@ -98,6 +125,16 @@ func _physics_process(delta):
 
 	stamina_bar.value = 100 * stamina / MAX_STAMINA
 	battery_power.value = 100 * curBattery / MAX_BATTERY
+
+
+
+
+
+
+
+
+
+
 "
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6djcv"]
@@ -162,3 +199,42 @@ offset_right = 220.0
 offset_bottom = 175.0
 scale = Vector2(0.75, 0.75)
 value = 50.0
+
+[node name="redcollect" type="ProgressBar" parent="GUI"]
+modulate = Color(1, 0, 0, 1)
+show_behind_parent = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -52.0
+offset_top = 75.0
+offset_right = -32.0
+offset_bottom = 102.0
+grow_horizontal = 0
+show_percentage = false
+
+[node name="bluecollect" type="ProgressBar" parent="GUI"]
+modulate = Color(0, 0, 1, 1)
+show_behind_parent = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -52.0
+offset_top = 105.0
+offset_right = -32.0
+offset_bottom = 132.0
+grow_horizontal = 0
+show_percentage = false
+
+[node name="greencollect" type="ProgressBar" parent="GUI"]
+modulate = Color(0, 0.32549, 0, 1)
+show_behind_parent = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -52.0
+offset_top = 135.0
+offset_right = -32.0
+offset_bottom = 162.0
+grow_horizontal = 0
+show_percentage = false

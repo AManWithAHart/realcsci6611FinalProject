@@ -1,3 +1,4 @@
+ProgressBar
 CollisionShape3D
 MeshInstance3D
 Area3D
@@ -5,7 +6,6 @@ RayCast3D
 VisibleOnScreenNotifier3D
 CollisionPolygon3D
 CollisionPolygon2D
-ProgressBar
 Node2D
 ColorRect
 CanvasLayer

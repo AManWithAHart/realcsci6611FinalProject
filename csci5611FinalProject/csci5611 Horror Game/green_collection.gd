@@ -1,7 +1,6 @@
 extends Area3D
 
-signal blue_collected
-
+signal green_collected
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,6 +13,7 @@ func _process(delta):
 
 #@onready var player = $Player
 
+
 func _on_body_entered(body):
-	emit_signal("blue_collected")
+	emit_signal("green_collected")
 	queue_free()

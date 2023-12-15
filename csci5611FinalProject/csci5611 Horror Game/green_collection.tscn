@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bf5ohb0okqe0k"]
+
+[ext_resource type="Script" path="res://green_collection.gd" id="1_f1upm"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ureq4"]
+height = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_liecc"]
+albedo_color = Color(0, 0.4, 0, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lsk15"]
+
+[node name="green_collection" type="Area3D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_f1upm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_ureq4")
+surface_material_override/0 = SubResource("StandardMaterial3D_liecc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_lsk15")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b2gbpxivbr1db"]
+[gd_scene load_steps=11 format=3 uid="uid://b2gbpxivbr1db"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_702xv"]
 [ext_resource type="Texture2D" uid="uid://rrwqmf8ebjro" path="res://Assets/Textures/Concrete_Tile.png" id="1_v55cr"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dj3ko3n82nqve" path="res://stalker.tscn" id="4_55ra3"]
 [ext_resource type="PackedScene" uid="uid://cdpowf6sgq383" path="res://red_collection.tscn" id="5_dlpm2"]
 [ext_resource type="PackedScene" uid="uid://d3pvxflfbmons" path="res://blue_collection.tscn" id="6_x0x65"]
+[ext_resource type="PackedScene" uid="uid://bf5ohb0okqe0k" path="res://green_collection.tscn" id="7_t3kd0"]
 
 [sub_resource type="Environment" id="Environment_wj7b5"]
 background_mode = 1
@@ -305,7 +306,15 @@ use_collision = true
 size = Vector3(18.7646, 6.57258, 17.1883)
 
 [node name="RedCollection" parent="." instance=ExtResource("5_dlpm2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.1234, 1.6022, -24.0863)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.8135, 1.6022, 45.5945)
 
 [node name="blue_collection" parent="." instance=ExtResource("6_x0x65")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.357, 1.33016, 45.1363)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.0466, 1.33016, 45.7523)
+
+[node name="green_collection" parent="." instance=ExtResource("7_t3kd0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.0813, 1.33208, 45.8763)
+
+[connection signal="red_collected" from="RedCollection" to="Player" method="_on_red_collected"]
+[connection signal="red_collected" from="RedCollection" to="Player" method="_on_red_collection_red_collected"]
+[connection signal="blue_collected" from="blue_collection" to="Player" method="_on_blue_collected"]
+[connection signal="green_collected" from="green_collection" to="Player" method="_on_green_collected"]
