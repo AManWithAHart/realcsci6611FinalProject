@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://csb74mx3h1848"]
+
+[ext_resource type="PackedScene" uid="uid://dhppbqwwkxb6q" path="res://Scenes/Characters/player.tscn" id="1_t5mra"]
+
+[node name="WinLevel" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(6.55538, 0.0296599, 6.77676)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0142606, 1.12037, -3.35376)
+use_collision = true
+size = Vector3(6.80435, 2.41026, 0.002)
+
+[node name="TextEdit" type="TextEdit" parent="CSGBox3D5"]
+offset_left = 291.0
+offset_top = 242.0
+offset_right = 794.0
+offset_bottom = 308.0
+text = "YOU WIN! Press f8 to close program"
+editable = false
+selecting_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00713032, 1.2111, 3.26704)
+use_collision = true
+size = Vector3(6.80435, 2.41026, 0.002)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.30889, 1.14411, 0)
+use_collision = true
+size = Vector3(0.127792, 2.54752, 6.75601)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1746, 1.1464, 0)
+use_collision = true
+size = Vector3(0.127792, 2.41319, 6.78589)
+
+[node name="Player" parent="." instance=ExtResource("1_t5mra")]

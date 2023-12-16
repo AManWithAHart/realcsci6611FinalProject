@@ -34,6 +34,8 @@ var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
 
 
 
+
+
 func _on_red_collected():
 	rCollect.value = 100
 	coins_collected += 1
@@ -133,12 +135,16 @@ func _physics_process(delta):
 
 
 
+func _on_battery_charge_battery():
+	curBattery += 20
+	if curBattery > 100:
+		curBattery = 100
 
 
-
-
-
-
+func _on_final_platform_finish():
+	stamina_bar.queue_free()
+	battery_power.queue_free()
+	
 "
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6djcv"]

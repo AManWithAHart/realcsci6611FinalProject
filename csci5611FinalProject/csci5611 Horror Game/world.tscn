@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2gbpxivbr1db"]
+[gd_scene load_steps=13 format=3 uid="uid://b2gbpxivbr1db"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_702xv"]
 [ext_resource type="Texture2D" uid="uid://rrwqmf8ebjro" path="res://Assets/Textures/Concrete_Tile.png" id="1_v55cr"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d3pvxflfbmons" path="res://blue_collection.tscn" id="6_x0x65"]
 [ext_resource type="PackedScene" uid="uid://bf5ohb0okqe0k" path="res://green_collection.tscn" id="7_t3kd0"]
 [ext_resource type="PackedScene" uid="uid://mwsfahvhkssj" path="res://final_platform.tscn" id="8_1pav5"]
+[ext_resource type="PackedScene" uid="uid://da046pu2jrkv4" path="res://battery.tscn" id="9_q5kkn"]
 
 [sub_resource type="Environment" id="Environment_wj7b5"]
 background_mode = 1
@@ -318,8 +319,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.2916, 1.33208, 46.1076)
 [node name="FinalPlatform" parent="." instance=ExtResource("8_1pav5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.9237, -0.333756, 45.6628)
 
+[node name="Battery" parent="." instance=ExtResource("9_q5kkn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.1551, 1.53744, 46.1758)
+
 [connection signal="exitOpen" from="Player" to="FinalPlatform" method="_on_player_exit_open"]
-[connection signal="red_collected" from="RedCollection" to="Player" method="_on_red_collected"]
 [connection signal="red_collected" from="RedCollection" to="Player" method="_on_red_collection_red_collected"]
+[connection signal="red_collected" from="RedCollection" to="Player" method="_on_red_collected"]
 [connection signal="blue_collected" from="blue_collection" to="Player" method="_on_blue_collected"]
 [connection signal="green_collected" from="green_collection" to="Player" method="_on_green_collected"]
+[connection signal="finish" from="FinalPlatform" to="Player" method="_on_final_platform_finish"]
+[connection signal="charge_battery" from="Battery" to="Player" method="_on_battery_charge_battery"]

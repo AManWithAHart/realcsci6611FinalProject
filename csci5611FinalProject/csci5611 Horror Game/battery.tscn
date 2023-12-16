@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://da046pu2jrkv4"]
+
+[ext_resource type="Script" path="res://battery.gd" id="1_ibcgq"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tx2jf"]
+height = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vjgef"]
+albedo_color = Color(0.152941, 0, 0, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_2fxop"]
+inner_radius = 0.25
+outer_radius = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8kik3"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qyspj"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bec65"]
+albedo_color = Color(1, 1, 0.231373, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_whgtu"]
+
+[node name="Battery" type="Area3D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_ibcgq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.764359, 0.644791, 0, -0.644791, 0.764359, 0, 0, 0, 1, 0, 0.101693, 0)
+mesh = SubResource("CylinderMesh_tx2jf")
+surface_material_override/0 = SubResource("StandardMaterial3D_vjgef")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.800731, 0.599024, 0, -0.599024, 0.800731, 0, 0, 0, 1, -0.0253198, 0.0855778, 0)
+mesh = SubResource("TorusMesh_2fxop")
+surface_material_override/0 = SubResource("StandardMaterial3D_8kik3")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.454507, 0.638711, 0)
+mesh = SubResource("SphereMesh_qyspj")
+surface_material_override/0 = SubResource("StandardMaterial3D_bec65")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_whgtu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

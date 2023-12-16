@@ -14,5 +14,5 @@ func _process(delta):
 
 
 func _on_restart_button_pressed():
-	get_tree().change_scene_to_file("res://.godot/imported/world.gltf-5157b869998e0f6b750d64a5f10b12ed.scn")
+	get_tree().change_scene_to_file()
 	
