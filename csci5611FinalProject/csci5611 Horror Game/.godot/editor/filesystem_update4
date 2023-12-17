@@ -1,11 +1,8 @@
-res://Scenes/Characters/basic_enemy.gd
-res://battery.gd
-res://battery.tscn
-res://world.tscn
-res://Scenes/Characters/player.tscn
 res://final_platform.tscn
-res://victory_screen.tscn
-res://victory_screen.gd
-res://FinalPlatform.gd
+res://Scenes/Characters/basic_enemy.gd
+res://Scenes/Characters/player.tscn
+res://world.tscn
+res://battery.tscn
 res://win_level.tscn
-res://IntroText.gd
+res://stalker.tscn
+res://Scripts/stalker.gd
