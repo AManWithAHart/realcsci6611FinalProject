@@ -27,6 +27,26 @@ albedo_texture = ExtResource("1_v55cr")
 [node name="World" type="Node3D"]
 script = ExtResource("1_702xv")
 
+[node name="IntroText" type="TextEdit" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -254.0
+offset_top = -23.0
+offset_right = 254.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Find the red, blue and green coin and then make your way back 
+here. Watch out for the Monster!"
+editable = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+script = ExtResource("2_1cv1p")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 visible = false
@@ -46,25 +66,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.805752, 6.56399, 0.510361)
 visible = false
 use_collision = true
 size = Vector3(103.22, 0.504816, 102.126)
-
-[node name="IntroText" type="TextEdit" parent="Ceiling"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -279.0
-offset_top = -38.0
-offset_right = 272.0
-offset_bottom = 41.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Find the red, blue and green coin and then make your way back 
-here. Watch out for the Monster!"
-editable = false
-selecting_enabled = false
-drag_and_drop_selection_enabled = false
-script = ExtResource("2_1cv1p")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_qsv2a")
