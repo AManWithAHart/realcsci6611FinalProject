@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://b2gbpxivbr1db"]
+[gd_scene load_steps=13 format=3 uid="uid://b2gbpxivbr1db"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_702xv"]
 [ext_resource type="Texture2D" uid="uid://rrwqmf8ebjro" path="res://Assets/Textures/Concrete_Tile.png" id="1_v55cr"]
-[ext_resource type="Script" path="res://IntroText.gd" id="2_1cv1p"]
 [ext_resource type="PackedScene" uid="uid://dhppbqwwkxb6q" path="res://Scenes/Characters/player.tscn" id="2_yn1ip"]
 [ext_resource type="PackedScene" uid="uid://dj3ko3n82nqve" path="res://stalker.tscn" id="4_55ra3"]
 [ext_resource type="PackedScene" uid="uid://cdpowf6sgq383" path="res://red_collection.tscn" id="5_dlpm2"]
@@ -27,27 +26,6 @@ albedo_texture = ExtResource("1_v55cr")
 [node name="World" type="Node3D"]
 script = ExtResource("1_702xv")
 
-[node name="IntroText" type="TextEdit" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -279.0
-offset_top = -38.0
-offset_right = 272.0
-offset_bottom = 41.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Find the red, blue and green coin and then make your way back 
-here. Watch out for the Monster!"
-editable = false
-selecting_enabled = false
-drag_and_drop_selection_enabled = false
-virtual_keyboard_enabled = false
-middle_mouse_paste_enabled = false
-script = ExtResource("2_1cv1p")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 visible = false
@@ -60,7 +38,7 @@ environment = SubResource("Environment_wj7b5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.2665, 9.53674e-07, 47.1345)
 
 [node name="Stalker" parent="." instance=ExtResource("4_55ra3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.821854, 1.90839, 46.08)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.821854, 1.90839, 45.4327)
 
 [node name="Ceiling" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.805752, 6.56399, 0.510361)

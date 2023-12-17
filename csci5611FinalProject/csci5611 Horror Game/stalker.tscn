@@ -12,6 +12,7 @@ material = SubResource("StandardMaterial3D_o7t8r")
 
 [node name="Stalker" type="CharacterBody3D" groups=["stalker"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 4
 script = ExtResource("1_3tdke")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -24,8 +25,10 @@ shape = SubResource("CapsuleShape3D_pjkba")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
 
-[node name="Visibility_Ray" type="RayCast3D" parent="."]
-target_position = Vector3(0, 0, 0)
+[node name="SearchTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
+[connection signal="timeout" from="SearchTimer" to="." method="_on_search_timer_timeout"]

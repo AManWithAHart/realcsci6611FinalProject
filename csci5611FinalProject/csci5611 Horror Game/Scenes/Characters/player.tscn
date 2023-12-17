@@ -1,4 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhppbqwwkxb6q"]
+[gd_scene load_steps=6 format=3 uid="uid://dhppbqwwkxb6q"]
+
+[ext_resource type="Script" path="res://IntroText.gd" id="1_pown5"]
 
 [sub_resource type="GDScript" id="GDScript_qs4nq"]
 script/source = "extends CharacterBody3D
@@ -106,7 +108,7 @@ func _physics_process(delta):
 
 	if Input.is_action_just_pressed(\"flashlight\"):
 		flashlight_on = !flashlight_on
-
+		get_tree().call_group(\"stalker\", \"flashlight_toggled\", flashlight_on)
 
 	if(flashlight_on):
 		if(curBattery <= 0):
@@ -261,3 +263,23 @@ offset_right = -32.0
 offset_bottom = 162.0
 grow_horizontal = 0
 show_percentage = false
+
+[node name="IntroText" type="PanelContainer" parent="GUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -279.0
+offset_top = -38.0
+offset_right = 272.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pown5")
+
+[node name="Label" type="Label" parent="GUI/IntroText"]
+layout_mode = 2
+text = "Find the red, blue and green coin and then make your way back 
+here. Watch out for the Monster!"
+horizontal_alignment = 1

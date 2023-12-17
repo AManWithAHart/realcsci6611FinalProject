@@ -8,35 +8,56 @@ extends CharacterBody3D
 #stalkers always know where the player is
 
 const SPEED = 8.0
-enum State {STALKING, FLEEING, APPRAISE}
+enum State {STALKING, FLEEING, APPRAISE, SEARCH}
+#enum State {STALKING, FLEEING, APPRAISE}
 
 var current_state = State.STALKING
 var in_los = false
 var fleeing = false
-
+var flashlight_on = true
+var search_range = 20
 
 @onready var nav_agent = $NavigationAgent3D
+@onready var search_timer = $SearchTimer
+@onready var visible_notif = $VisibleOnScreenNotifier3D
+
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func get_visible_by_player():
-	if in_los:
-		var cam_pos = get_viewport().get_camera_3d().get_global_position()
-		#print(cam_pos)
-		var visibility_ray = $Visibility_Ray
-		visibility_ray.target_position = cam_pos - position
-		#print(visibility_ray.is_colliding())
-		if ((cam_pos - position).length() > 18) or visibility_ray.is_colliding():
-			current_state = State.STALKING
-		else:
-			current_state = State.APPRAISE
-	else:
+	var cam_pos = get_viewport().get_camera_3d().get_global_position()
+	var space_state = get_world_3d().direct_space_state
+	
+	#make a raycast query
+	var query = PhysicsRayQueryParameters3D.create(cam_pos, position, 1)
+	query.collide_with_areas = true
+
+	#will be null when there is direction LOS to the player
+	var result = space_state.intersect_ray(query)
+	
+	
+	if visible_notif.is_on_screen():
+		if flashlight_on:
+			#print(visibility_ray.is_colliding())
+			if ((cam_pos - position).length() < 18) or not result:
+				print("Spotted, running away")
+				current_state = State.APPRAISE
+				return
+	if not result and current_state == State.SEARCH:
+		print("Player found: Hunting")
+		search_timer.stop()
 		current_state = State.STALKING
 
 func update_target_location(target):
 	if current_state == State.STALKING:
 		nav_agent.target_position = target
-
+	if current_state == State.SEARCH:
+		if search_timer.is_stopped() or nav_agent.is_target_reached():
+			nav_agent.target_position = target + Vector3(randi_range(0, 15), position.y, randi_range(0, 15)).rotated(Vector3(0, 1, 0), randf_range(0, 6.28))
+			nav_agent.target_position = nav_agent.get_final_position()
+			search_timer.start()
+			print("Looking for player at position: " + str(nav_agent.target_position))
+		
 func _physics_process(delta):
 	var cur_location = global_transform.origin
 	
@@ -45,7 +66,7 @@ func _physics_process(delta):
 			get_visible_by_player()
 			var next_location = nav_agent.get_next_path_position()
 			var new_vel = next_location - cur_location
-			new_vel = new_vel.normalized() * SPEED
+			new_vel = new_vel.normalized() * SPEED * 1.5
 			
 			velocity = velocity.move_toward(new_vel, 0.25)
 		State.FLEEING:
@@ -56,7 +77,8 @@ func _physics_process(delta):
 			velocity = velocity.move_toward(new_vel, 0.25)
 			
 			if nav_agent.distance_to_target() < 1:
-				current_state = State.STALKING
+				current_state = State.SEARCH
+				#current_state = State.STALKING
 				print("Reached!")
 			
 		State.APPRAISE:
@@ -67,7 +89,7 @@ func _physics_process(delta):
 			for i in range(20):
 				var space_state = get_world_3d().direct_space_state
 				#get a random position to move to
-				var test_position = position + Vector3(randi_range(10, 15), position.y, randi_range(5, 15)).rotated(Vector3(0, 1, 0), randf_range(0, 6.28))
+				var test_position = position + Vector3(randi_range(10, 15), position.y, randi_range(10, 15)).rotated(Vector3(0, 1, 0), randf_range(0, 6.28))
 				
 				#fit the position inside the nav mesh
 				nav_agent.target_position = test_position
@@ -91,16 +113,31 @@ func _physics_process(delta):
 
 			print(nav_agent.target_position)
 			current_state = State.FLEEING
-			
+		State.SEARCH:
+			get_visible_by_player()
+			var next_location = nav_agent.get_next_path_position()
+			var new_vel = next_location - cur_location
+			new_vel = new_vel.normalized() * SPEED * 1.5
+
+			velocity = velocity.move_toward(new_vel, 0.25)
 	
 	if not is_on_floor():
 		velocity.y -= gravity
 	move_and_slide()
 
+func flashlight_toggled(state):
+	flashlight_on = state
 
 func _on_visible_on_screen_notifier_3d_screen_entered():
 	in_los = true
+	print("in los")
 
 
 func _on_visible_on_screen_notifier_3d_screen_exited():
 	in_los = false
+	print("not in los")
+
+
+func _on_search_timer_timeout():
+	search_range -= 5
+	if search_range < 0: search_range = 0
