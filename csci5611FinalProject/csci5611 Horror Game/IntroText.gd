@@ -12,6 +12,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		queue_free()
 	if(displaytext):
 		if cur_timer >= max_timer:
 			queue_free()

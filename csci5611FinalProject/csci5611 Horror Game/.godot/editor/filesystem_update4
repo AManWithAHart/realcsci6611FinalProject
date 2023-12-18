@@ -3,3 +3,8 @@ res://Scenes/Characters/basic_enemy.gd
 res://world.tscn
 res://stalker.tscn
 res://win_level.tscn
+res://red_collection.tscn
+res://Scenes/gameover.tscn
+res://Scenes/gameover.gd
+res://final_platform.tscn
+res://IntroText.gd
