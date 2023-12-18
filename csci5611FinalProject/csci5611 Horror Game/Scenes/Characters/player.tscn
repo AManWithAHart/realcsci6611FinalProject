@@ -112,7 +112,7 @@ func _physics_process(delta):
 		if(curBattery <= 0):
 			flashlight.light_energy = 0
 		else:
-			curBattery -= delta/20
+			curBattery -= delta/10
 			flashlight.light_energy = 15
 	else:
 		flashlight.light_energy = 0
