@@ -1,4 +1,4 @@
-extends TextEdit
+extends PanelContainer
 
 
 const max_timer = 3
