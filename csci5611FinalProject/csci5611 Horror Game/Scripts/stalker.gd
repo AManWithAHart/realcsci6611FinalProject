@@ -8,10 +8,10 @@ extends CharacterBody3D
 #stalkers always know where the player is
 
 const SPEED = 8.0
-enum State {STALKING, FLEEING, APPRAISE, SEARCH}
+enum State {STALKING, FLEEING, APPRAISE, SEARCH, REST}
 #enum State {STALKING, FLEEING, APPRAISE}
 
-var current_state = State.STALKING
+var current_state = State.REST
 var in_los = false
 var fleeing = false
 var flashlight_on = true
@@ -120,6 +120,8 @@ func _physics_process(delta):
 			new_vel = new_vel.normalized() * SPEED * 1.5
 
 			velocity = velocity.move_toward(new_vel, 0.25)
+		State.REST:
+			current_state = State.SEARCH
 	
 	if not is_on_floor():
 		velocity.y -= gravity
