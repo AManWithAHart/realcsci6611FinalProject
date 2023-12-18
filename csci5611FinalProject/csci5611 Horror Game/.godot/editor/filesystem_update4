@@ -1,8 +1,5 @@
-res://world.tscn
-res://Scenes/Characters/basic_enemy.gd
 res://Scenes/Characters/player.tscn
+res://Scenes/Characters/basic_enemy.gd
+res://world.tscn
 res://stalker.tscn
 res://win_level.tscn
-res://IntroText.gd
-res://Scripts/stalker.gd
-res://VisibleOnScreenNotifier3D.gd
